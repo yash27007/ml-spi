@@ -3,10 +3,16 @@ from datetime import datetime
 from pathlib import Path
 
 LOG_FORMAT = "[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s"
+_configured_log_path: Path | None = None
 
 
 def configure_logging(logs_dir: Path | None = None) -> Path:
     """Configure application logging once and return the created log-file path."""
+    global _configured_log_path
+
+    if _configured_log_path is not None:
+        return _configured_log_path
+
     target_dir = logs_dir or Path.cwd() / "logs"
     target_dir.mkdir(parents=True, exist_ok=True)
 
@@ -16,8 +22,10 @@ def configure_logging(logs_dir: Path | None = None) -> Path:
         encoding="utf-8",
         format=LOG_FORMAT,
         level=logging.INFO,
+        force=True,
     )
-    return log_file_path
+    _configured_log_path = log_file_path
+    return _configured_log_path
 
 
 if __name__ == "__main__":

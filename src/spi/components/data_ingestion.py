@@ -7,7 +7,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from spi.exception import CustomException
-
+from spi.components.data_transform import DataTransformation
+from spi.components.model_trainer import ModelTrainerConfig
+from spi.components.model_trainer import ModelTrainer
 logger = logging.getLogger(__name__)
 
 
@@ -48,5 +50,14 @@ class DataIngestion:
 if __name__ == "__main__":
     from spi.logger import configure_logging
     configure_logging()
+
     obj = DataIngestion()
-    obj.inititate_data_ingestion()
+    train_data,test_data =  obj.inititate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    train_array,test_array,preprocessor_path=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    model_trainer = ModelTrainer()
+    r2_score = model_trainer.initiate_model_trainer(train_array=train_array,test_array=test_array,preprocessor_path=preprocessor_path)
+    print(r2_score)
+    

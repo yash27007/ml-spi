@@ -222,3 +222,5 @@ __marimo__/
 #Data
 artifacts/
 .artifact
+
+logs/

@@ -1,13 +1,12 @@
 """Application entry point."""
 
-import logging
-
+from spi.app import create_app
 from spi.logger import configure_logging
 
 
 def main() -> None:
     configure_logging()
-    logging.getLogger(__name__).info("SPI application started")
+    create_app().run(host="0.0.0.0", port=5000, debug=True)
 
 
 if __name__ == "__main__":

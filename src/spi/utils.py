@@ -18,6 +18,15 @@ def save_object(file_path: str, obj) -> None:
         raise CustomException(error, sys) from error
 
 
+def load_object(file_path: str):
+    """Load an object previously serialized with dill."""
+    try:
+        with open(file_path, "rb") as file:
+            return dill.load(file)
+    except Exception as error:
+        raise CustomException(error, sys) from error
+
+
 def evaluate_model(X_test, y_test, models: dict) -> dict:
     """Evaluate already-fitted regressors on held-out test data."""
     try:

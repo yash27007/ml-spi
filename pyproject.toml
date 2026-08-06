@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "catboost>=1.2.10",
     "dill>=0.4.1",
+    "flask>=3.1.3",
     "numpy>=2.5.1",
     "pandas>=3.0.3",
     "scikit-learn>=1.9.0",
@@ -16,6 +17,7 @@ dependencies = [
 
 [project.scripts]
 spi = "spi.main:main"
+train = "spi.pipeline.train_pipeline:main"
 
 [build-system]
 requires = ["uv_build>=0.9.5,<0.10.0"]

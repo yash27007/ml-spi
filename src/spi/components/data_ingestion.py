@@ -59,5 +59,5 @@ if __name__ == "__main__":
 
     model_trainer = ModelTrainer()
     r2_score = model_trainer.initiate_model_trainer(train_array=train_array,test_array=test_array,preprocessor_path=preprocessor_path)
-    print(r2_score)
+    print("R2 Score: ",r2_score)
     
